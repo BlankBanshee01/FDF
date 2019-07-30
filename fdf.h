@@ -1,5 +1,7 @@
-#include <mlx.h>
+#include </Users/banshee/Desktop/FDF/MinilibX/elcapitan/mlx.h>
 #include <stdio.h>
+#include "./GetNextLineV2/get_next_line.h"
+
 typedef	struct	s_data
 {
 		void	*mlx;
