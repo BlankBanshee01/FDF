@@ -1,6 +1,6 @@
-#include </Users/banshee/Desktop/FDF/MinilibX/elcapitan/mlx.h>
+#include <mlx.h>
 #include <stdio.h>
-#include "./GetNextLineV2/get_next_line.h"
+#include "libft/libft.h"
 
 typedef	struct	s_data
 {
@@ -8,12 +8,23 @@ typedef	struct	s_data
 		void	*window;
 		void	*img_ptr;
 		int		*image; //buff
-
-		
 		int 	bits_per_pixel;
 		int 	size_line;
 		int 	endian;
 }				t_data;
+
+typedef struct	s_map
+{
+		int		x;
+		int		y;
+		int		z;
+}				t_map;
+
+int    check_valid(char *argv);
+
+
+
+
 // pixel representation in memory
 
 //     A        R        G      B        
