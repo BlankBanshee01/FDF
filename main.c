@@ -13,8 +13,7 @@ int main(int argc, char **argv)
         ft_putstr("file not valid");
         return (0);
     }
-    
-    ft_putstr("check passed successfully");
+    reading(argv[1]);
 
     // int x = 0, y = 5;
     // while (x < 500)

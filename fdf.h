@@ -21,6 +21,7 @@ typedef struct	s_map
 }				t_map;
 
 int    check_valid(char *argv);
+char **reading(char *argv);
 
 
 
