@@ -26,7 +26,8 @@ int    check_valid(char *argv)
     char *line;
     int length;
 
-    fd = open(argv, O_RDONLY);
+    if ((fd = open(argv, O_RDONLY)) <= 0)
+        return (0);
     if (get_next_line(fd, &line))
         length = line_length(line);
     while (get_next_line(fd, &line))
@@ -61,7 +62,52 @@ char **reading(char *argv)
         free(tmp);
     }
     table = ft_strsplit(joined, '\n');
-    while (*table++)
-        printf("\n%s\n", *table);
     return table;
+}
+
+void    storing_length(char **table, t_map **map)
+{
+    (*map)->x_long = line_length(table[0]);
+    (*map)->y_hight = 0;
+    while (*table++)
+        (*map)->y_hight++;
+}
+
+t_map   *storing_data(t_map **map, char **table)
+{
+    printf("x = %d  y = %d", (*map)->x_long, (*map)->y_hight);
+    (*map)->map_cord[2][1] = 15;
+    printf("\nhere\n");
+
+}
+
+int     reading_manager(char *argv)
+{
+    int     i;
+    int     j;
+    t_map   *map;
+    char    **table;
+
+    i = 0;
+    j = 0;
+    if (!check_valid(argv))
+    {
+        ft_putstr("file not valid");
+        return (0);
+    }
+    if (!(map = (t_map *)malloc(sizeof(t_map))))
+        return (0);
+    table = reading(argv);
+    storing_length(table, &map);
+    map->map_cord = malloc(sizeof(map->map_cord) * map->y_hight);
+    // map->map_cord[0] = malloc(sizeof(int));
+    while (i <= map->y_hight)
+    {
+        map->map_cord[i] = (int *)malloc(sizeof(int) * map->x_long);
+        i++;
+    }
+    storing_data(&map, table);
+    printf("%d",map->map_cord[1][5]);
+    free(table);
+    return (1);
 }

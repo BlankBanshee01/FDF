@@ -15,13 +15,17 @@ typedef	struct	s_data
 
 typedef struct	s_map
 {
-		int		x;
-		int		y;
-		int		z;
+		int		x_long;
+		int		y_hight;
+		int		**map_cord;
+
 }				t_map;
 
-int    check_valid(char *argv);
-char **reading(char *argv);
+int		check_valid(char *argv);
+char	**reading(char *argv);
+void	storing_length(char **table, t_map **map);
+int		reading_manager(char *argv);
+
 
 
 
