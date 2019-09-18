@@ -2,17 +2,6 @@
 #include <stdio.h>
 #include "libft/libft.h"
 
-typedef	struct	s_data
-{
-		void	*mlx;
-		void	*window;
-		void	*img_ptr;
-		int		*image; //buff
-		int 	bits_per_pixel;
-		int 	size_line;
-		int 	endian;
-}				t_data;
-
 typedef struct	s_map
 {
 		int		x_long;
@@ -21,10 +10,26 @@ typedef struct	s_map
 
 }				t_map;
 
+typedef	struct	s_data
+{
+		void	*mlx;
+		void	*window;
+		void	*img_ptr;
+		int		height;
+		int 	width;
+		int		*image; //buff
+		int 	bits_per_pixel;
+		int 	size_line;
+		int 	endian;
+		t_map	*map;
+}				t_data;
+
+
 int		check_valid(char *argv);
 char	**reading(char *argv);
 void	storing_length(char **table, t_map **map);
-int		reading_manager(char *argv);
+t_map		*reading_manager(char *argv);
+void ft_draw(t_data *data);
 
 
 
