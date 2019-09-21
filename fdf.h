@@ -1,5 +1,6 @@
 #include <mlx.h>
 #include <stdio.h>
+#include <math.h>
 #include "libft/libft.h"
 
 typedef struct	s_map
@@ -30,8 +31,8 @@ char	**reading(char *argv);
 void	storing_length(char **table, t_map **map);
 t_map		*reading_manager(char *argv);
 void ft_draw(t_data *data);
-
-
+void    ft_color_pixel(int x, int y, t_data *data);
+void    plotLineHigh(int x0,int y0,int x1,int y1, t_data *data);
 
 
 
