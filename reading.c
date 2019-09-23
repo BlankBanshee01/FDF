@@ -101,7 +101,7 @@ void   storing_data(t_map **map, char **table)
 {
     int     i;
     char    **tab;
-    int j;
+    int     j;
 
     i = 0;
     printf("x = %d  y = %d", (*map)->x_long, (*map)->y_hight);
@@ -139,7 +139,7 @@ t_map    *reading_manager(char *argv)
         return (0);
     table = reading(argv);
     storing_length(table, &map);
-    map->map_cord = malloc(sizeof(int *) * map->y_hight);
+    map->map_cord = malloc(sizeof(int *) * map->y_hight + 1);
     while (i <= map->y_hight)
     {
         map->map_cord[i] = (int *)malloc(sizeof(int) * map->x_long);
@@ -150,9 +150,9 @@ t_map    *reading_manager(char *argv)
     {
         for (int k = 0; k < map->x_long; k++)
         {
-            printf("%d ", map->map_cord[h][k]);
+            // printf("%d %d\n", h, k);
         }
-        printf("\n");
+        // printf("\n");
     }
     free_table(&table);
     

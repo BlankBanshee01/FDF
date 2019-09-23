@@ -11,6 +11,42 @@ typedef struct	s_map
 
 }				t_map;
 
+typedef struct	s_vect3
+{
+		int		x;
+		int		y;
+		int		z;
+}				t_vect3;
+typedef struct	s_vect
+{
+		int		x0;
+		int		y0;
+		int		x1;
+		int		y1;
+		int		z;
+		int		z_down;
+		int		z_right;
+		t_vect3	vect0;
+		t_vect3	vect1;
+
+}				t_vect;
+
+
+typedef struct	s_index
+{
+		int		x;
+		int		y;
+		int		i;
+		int		j;
+}				t_index;
+typedef struct	s_count
+{
+		int		f;
+		int		s;
+}				t_count;
+
+
+
 typedef	struct	s_data
 {
 		void	*mlx;
@@ -22,6 +58,7 @@ typedef	struct	s_data
 		int 	bits_per_pixel;
 		int 	size_line;
 		int 	endian;
+		int		spc;
 		t_map	*map;
 }				t_data;
 
@@ -33,6 +70,8 @@ t_map		*reading_manager(char *argv);
 void ft_draw(t_data *data);
 void    ft_color_pixel(int x, int y, t_data *data);
 void    plotLineHigh(int x0,int y0,int x1,int y1, t_data *data);
+void ft_draw_iso(t_data *data);
+
 
 
 

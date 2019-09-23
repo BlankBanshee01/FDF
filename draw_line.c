@@ -54,8 +54,6 @@ void    plotLineHigh(int x0,int y0,int x1,int y1, t_data *data)
 	D = 2*dx - dy;
 	x = x0;
 	y = y0;
-        printf("\nherriii\n");
-
 	while (y < y1)
 	{
 		ft_color_pixel(x,y, data);
@@ -70,7 +68,8 @@ void    plotLineHigh(int x0,int y0,int x1,int y1, t_data *data)
 }
 
 void    plotLine(int x0,int y0,int x1,int y1, t_data *data)
-{  if (abs(y1 - y0) < abs(x1 - x0))
+{
+	if (abs(y1 - y0) < abs(x1 - x0))
 	{
 		if (x0 > x1)
 			plotLineLow(x1, y1, x0, y0, data);
