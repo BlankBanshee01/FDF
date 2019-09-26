@@ -1,46 +1,42 @@
 
 #include "libft.h"
 
-static int	putline(const int fd, char **line, char **stat)
+static void	ft_get_line(char **str, char **line)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (stat[fd][i] != '\0' && stat[fd][i] != '\n')
+	while ((*str)[i] != '\0' && (*str)[i] != '\n')
 		i++;
-	if (stat[fd][i] == '\n')
-	{
-		*line = ft_strsub(stat[fd], 0, i);
-		stat[fd] = ft_strdup(stat[fd] + i + 1);
-		if (stat[fd][0] == '\0')
-			ft_strdel(&stat[fd]);
-	}
-	else if (stat[fd][i] == '\0')
-	{
-		*line = ft_strdup(stat[fd]);
-		ft_strdel(&stat[fd]);
-	}
-	return (1);
+	*line = ft_strsub(*str, 0, i);
+	(void)ft_strcpy(*str, *str + i + 1);
+	if (**str == '\0')
+		ft_strdel(str);
 }
 
-int	get_next_line(const int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
-	int			re;
-	char		buffer[BUFF_SIZE + 1];
-	static char	*stat[4096];
+	ssize_t		ret;
+	char		buf[BUFF_SIZE + 1];
+	static char	*str;
+	char		*tmp;
 
-	if (fd < 0 || line == NULL || BUFF_SIZE <= 0 || fd > 4096)
+	if (fd < 0 || BUFF_SIZE <= 0 || !line)
 		return (-1);
-	while ((re = read(fd, buffer, BUFF_SIZE)) > 0)
+	str = str == NULL ? ft_strnew(0) : str;
+	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
-		if (stat[fd] == NULL)
-			stat[fd] = ft_strnew(1);
-		buffer[re] = '\0';
-		stat[fd] = ft_strjoin(stat[fd], buffer);
+		buf[ret] = '\0';
+		tmp = str;
+		str = ft_strjoin(str, buf);
+		ft_strdel(&tmp);
+		if (ft_strchr(str, '\n'))
+			break ;
 	}
-	if (re < 0)
+	if (ret < 0)
 		return (-1);
-	if (re == 0 && (stat[fd] == NULL || stat[fd][0] == '\0'))
+	if (ret == 0 && (str == NULL || str[0] == '\0'))
 		return (0);
-	return (putline(fd, line, stat));
+	ft_get_line(&str, line);
+	return (1);
 }

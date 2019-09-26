@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
+#include <stdio.h> 
 static unsigned int	ft_cc(const char *str, char c)
 {
 	size_t	i;

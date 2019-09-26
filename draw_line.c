@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-void    plotLineLow(int x0,int y0,int x1,int y1, t_data *data)
+static void    plotLineLow(int x0,int y0,int x1,int y1, t_data *data)
 {
 	int dx;
 	int dy;
@@ -34,7 +34,7 @@ void    plotLineLow(int x0,int y0,int x1,int y1, t_data *data)
 	}
 }
 
-void    plotLineHigh(int x0,int y0,int x1,int y1, t_data *data)
+static void    plotLineHigh(int x0,int y0,int x1,int y1, t_data *data)
 {
 	int dx;
 	int dy;
@@ -54,7 +54,7 @@ void    plotLineHigh(int x0,int y0,int x1,int y1, t_data *data)
 	D = 2*dx - dy;
 	x = x0;
 	y = y0;
-	while (y < y1)
+	while (y <= y1)
 	{
 		ft_color_pixel(x,y, data);
 		if (D > 0)
@@ -65,6 +65,7 @@ void    plotLineHigh(int x0,int y0,int x1,int y1, t_data *data)
 		D = D + 2*dx;
         y++;
 	}
+
 }
 
 void    plotLine(int x0,int y0,int x1,int y1, t_data *data)
