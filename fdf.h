@@ -59,15 +59,17 @@ typedef	struct	s_data
 		int 	size_line;
 		int 	endian;
 		int		spc;
-		t_map	map;
+		t_map	*map;
 }				t_data;
 
 
-t_map		reading_manager(char *argv);
+t_map		*reading_manager(char *argv);
 void ft_draw(t_data *data);
 void    ft_color_pixel(int x, int y, t_data *data);
 void ft_draw_iso(t_data *data);
 void    plotLine(int x0,int y0,int x1,int y1, t_data *data);
+void    free_int(int ***to_free, int length);
+void    free_table(char ***to_free);
 
 
 
