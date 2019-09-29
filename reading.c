@@ -24,11 +24,13 @@ static int  map_length_valid(char *argv, t_map **map)
     char    *line;
     int     len;
     char    **table;
+    int ret;
 
     len = -1;
     (*map)->y_hight = 0;
     fd = open(argv, O_RDONLY);
-    while (get_next_line(fd, &line))
+    ret = get_next_line(fd, &line);
+    while ((ret = get_next_line(fd, &line)) > 0)
     {
         if (len == -1)
                 len = ft_wcount2(line, ' ');
@@ -40,6 +42,11 @@ static int  map_length_valid(char *argv, t_map **map)
         free(line);
         (*map)->y_hight+=1;
     }
+    if (ret == -1)
+        {
+            ft_putstr("This is a directory need a file.fdf\n");
+            exit(0);
+        }
     (*map)->x_long = len;
     close(fd);
     return (1);
@@ -79,10 +86,17 @@ t_map    *reading_manager(char *argv)
     j = 0;
     i = 0;
 
+
+    if (open(argv, O_RDONLY) == -1)
+    {
+        perror("error");
+        exit(0);
+    }
     map = (t_map *)malloc(sizeof(t_map));
     if (!map_length_valid(argv, &map))
     {
         ft_putstr("file not valid");
+        free(map);
         exit(0);
     }
     map->map_cord = malloc(sizeof(int *) * map->y_hight + 1);

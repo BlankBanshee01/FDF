@@ -40,13 +40,12 @@ void ft_draw_iso(t_data *data)
     t_index p;
     t_vect  vect;
 
-    data->spc = 15;
     p.i = 0;
-    p.y = 0;
+    p.y = data->offset_y;
     while (p.i < data->map->y_hight)
     {
         p.j = 0;
-        p.x = 400;
+        p.x = data->offset_x;
         while (p.j < data->map->x_long)
         {
             ft_draw_iso_2(data, p, &vect);

@@ -23,3 +23,9 @@ void    free_table(char ***to_free)
         i++;
     }
 }
+
+void quitting_esc(t_data *data)
+{
+    free_int(&data->map->map_cord, data->map->y_hight);
+    exit(0);
+}

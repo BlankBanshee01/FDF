@@ -59,6 +59,11 @@ typedef	struct	s_data
 		int 	size_line;
 		int 	endian;
 		int		spc;
+		char	*map_name;
+		char	projection;
+		int		offset_y;
+		int		offset_x;
+		int		color;
 		t_map	*map;
 }				t_data;
 
@@ -70,6 +75,8 @@ void ft_draw_iso(t_data *data);
 void    plotLine(int x0,int y0,int x1,int y1, t_data *data);
 void    free_int(int ***to_free, int length);
 void    free_table(char ***to_free);
+void quitting_esc(t_data *data);
+int key_press(int keycode, t_data *data);
 
 
 
