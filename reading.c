@@ -17,22 +17,36 @@ static unsigned int	ft_wcount2(const char *str, char c)
 	}
 	return (a);
 }
+void    ft_isdir(int ret, int fd, t_map **map)
+{
+    if (ret == -1)
+        {
+            close(fd);
+            free(*map);
+            ft_putstr("Argument is a directory.\nUsage: ./fdf file.fdf\n");
+            exit(0);
+        }
+}
+
+void    first_line_len(int *len, int first_len)
+{
+    if (*len == -1)
+            *len = first_len;
+}
 
 static int  map_length_valid(char *argv, t_map **map)
 {
-    int     fd;
-    char    *line;
-    int     len;
-    int ret;
+    int             fd;
+    int             ret;
+    char            *line;
+    int    len;
 
     len = -1;
     (*map)->y_hight = 0;
     fd = open(argv, O_RDONLY);
-    ret = get_next_line(fd, &line);
     while ((ret = get_next_line(fd, &line)) > 0)
     {
-        if (len == -1)
-                len = ft_wcount2(line, ' ');
+        first_line_len(&len, ft_wcount2(line, ' '));
         if ((int)ft_wcount2(line, ' ') != len || len == 0)
         {
             ft_strdel(&line);
@@ -41,11 +55,7 @@ static int  map_length_valid(char *argv, t_map **map)
         free(line);
         (*map)->y_hight+=1;
     }
-    if (ret == -1)
-        {
-            ft_putstr("This is a directory need a file.fdf\n");
-            exit(0);
-        }
+    ft_isdir(ret, fd, map);
     (*map)->x_long = len;
     close(fd);
     return (1);
@@ -92,7 +102,7 @@ t_map    *reading_manager(char *argv)
     map = (t_map *)malloc(sizeof(t_map));
     if (!map_length_valid(argv, &map))
     {
-        ft_putstr("file not valid");
+        ft_putstr("file not valid\n");
         free(map);
         exit(0);
     }
@@ -100,7 +110,6 @@ t_map    *reading_manager(char *argv)
     while (i <= map->y_hight)
         map->map_cord[i++] = (int *)malloc(sizeof(int) * map->x_long);
     reading(argv, &map);
-
     return (map);
 }
     // free_int(&map->map_cord, map->y_hight);

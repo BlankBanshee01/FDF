@@ -1,5 +1,16 @@
 #include "fdf.h"
 
+void    reinitialize_win(t_data *data)
+{
+    mlx_clear_window(data->mlx , data->window);
+    mlx_destroy_image(data->mlx, data->img_ptr);
+    data->img_ptr = mlx_new_image(data->mlx, data->width, data->height);
+    data->image = (int *)mlx_get_data_addr(data->img_ptr, &data->bits_per_pixel, &data->size_line, &data->endian);
+    data->projection == 'p' ? ft_draw(data) : ft_draw_iso(data);
+    mlx_put_image_to_window(data->mlx, data->window, data->img_ptr, 0, 0);
+    printing_usage(data);
+}
+
 void    printing_usage(t_data *data)
 {
     mlx_string_put(data->mlx, data->window, 20, 10, 0xFFFFFF, data->map_name);
@@ -32,7 +43,7 @@ int main(int argc, char **argv)
     
     if (argc != 2)
         {
-            ft_putstr("usage: fdf file.fdf");
+            ft_putstr("usage: fdf file.fdf\n");
             return (1);
         }
     initilazing_data(&data, argv[1]);

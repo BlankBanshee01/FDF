@@ -11,12 +11,6 @@ typedef struct	s_map
 
 }				t_map;
 
-typedef struct	s_vect3
-{
-		int		x;
-		int		y;
-		int		z;
-}				t_vect3;
 typedef struct	s_vect
 {
 		int		x0;
@@ -26,9 +20,6 @@ typedef struct	s_vect
 		int		z;
 		int		z_down;
 		int		z_right;
-		t_vect3	vect0;
-		t_vect3	vect1;
-
 }				t_vect;
 
 
@@ -39,12 +30,6 @@ typedef struct	s_index
 		int		i;
 		int		j;
 }				t_index;
-typedef struct	s_count
-{
-		int		f;
-		int		s;
-}				t_count;
-
 
 typedef struct	s_ploting
 {
@@ -64,7 +49,7 @@ typedef	struct	s_data
 		void	*img_ptr;
 		int		height;
 		int 	width;
-		int		*image; //buff
+		int		*image;
 		int 	bits_per_pixel;
 		int 	size_line;
 		int 	endian;
@@ -78,22 +63,23 @@ typedef	struct	s_data
 }				t_data;
 
 
-t_map		*reading_manager(char *argv);
-void ft_draw(t_data *data);
-void    ft_color_pixel(int x, int y, t_data *data);
-void ft_draw_iso(t_data *data);
-void    plotLine(t_vect vect, t_data *data);
-void    free_int(int ***to_free, int length);
-void    free_table(char ***to_free);
-void quitting_esc(t_data *data);
-int key_press(int keycode, t_data *data);
-void    printing_usage(t_data *data);
+t_map	*reading_manager(char *argv);
+void	ft_draw(t_data *data);
+void	ft_color_pixel(int x, int y, t_data *data);
+void	ft_draw_iso(t_data *data);
+void	plotLine(t_vect vect, t_data *data);
+void	free_int(int ***to_free, int length);
+void	free_table(char ***to_free);
+void	quitting_esc(t_data *data);
+void	printing_usage(t_data *data);
+void	reinitialize_win(t_data *data);
+int		key_press(int keycode, t_data *data);
 
+/*
+	pixel representation in memory
 
+       A        R        G      B        
+   00000000 00000000 00000000 00000000
 
-// pixel representation in memory
-
-//     A        R        G      B        
-// 00000000 00000000 00000000 00000000
-
-// color = 0xFF00FF
+   color = 0xFF00FF
+*/
