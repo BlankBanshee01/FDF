@@ -1,87 +1,91 @@
 #include "fdf.h"
 
-static void    plotLineLow(int x0,int y0,int x1,int y1, t_data *data)
+static void flip_coord(t_vect *vect)
 {
-	int dx;
-	int dy;
-	int yi;
-	int D;
-	int x;
-	int y;
+	int tmp;
 
-	dx = x1 - x0;
-	dy = y1 - y0;
-	yi = 1;
-	if (dy < 0)
+	tmp = vect->x0;
+	vect->x0 = vect->x1;
+	vect->x1 = tmp;
+	tmp = vect->y0;
+	vect->y0 = vect->y1;
+	vect->y1 = tmp;	
+}
+
+static void setting_var(t_plo *plo, t_vect vect)
+{
+	plo->dx = vect.x1 - vect.x0;
+	plo->dy = vect.y1 - vect.y0;
+	plo->xi = 1;
+	plo->yi = 1;
+	plo->y = vect.y0;
+	plo->x = vect.x0;
+}
+
+static void    plotLineHigh(int rev, t_vect vect, t_data *data)
+{
+	t_plo plo;
+
+	rev ? flip_coord(&vect) : rev;
+	setting_var(&plo, vect);
+	if (plo.dx < 0)
 	{
-		yi = -1;
-		dy = -dy;
+		plo.xi = -1;
+		plo.dx = -plo.dx;
 	}
-	D = 2*dy - dx;
-	y = y0;
-
-	x = x0;
-	while (x < x1)
+	plo.D = 2*plo.dx - plo.dy;
+	while (plo.y <= vect.y1)
 	{
-		ft_color_pixel(x,y, data);
-		if (D > 0)
+		ft_color_pixel(plo.x,plo.y, data);
+		if (plo.D > 0)
 		{
-			y = y + yi;
-			D = D - 2*dx;
+			plo.x = plo.x + plo.xi;
+			plo.D = plo.D - 2*plo.dy;
 		}
-		D = D + 2*dy;
-        x++;
+		plo.D = plo.D + 2*plo.dx;
+        plo.y++;
 	}
 }
 
-static void    plotLineHigh(int x0,int y0,int x1,int y1, t_data *data)
+static void    plotLineLow(int rev, t_vect vect, t_data *data)
 {
-	int dx;
-	int dy;
-	int D;
-	int x;
-	int xi;
-	int y;
+	t_plo plo;
 
-	dx = x1 - x0;
-	dy = y1 - y0;
-	xi = 1;
-	if (dx < 0)
+	rev ? flip_coord(&vect) : rev;
+	setting_var(&plo, vect);
+	if (plo.dy < 0)
 	{
-		xi = -1;
-		dx = -dx;
+		plo.yi = -1;
+		plo.dy = -plo.dy;
 	}
-	D = 2*dx - dy;
-	x = x0;
-	y = y0;
-	while (y <= y1)
+	plo.D = 2*plo.dy - plo.dx;
+	while (plo.x < vect.x1)
 	{
-		ft_color_pixel(x,y, data);
-		if (D > 0)
+		ft_color_pixel(plo.x,plo.y, data);
+		if (plo.D > 0)
 		{
-			x = x + xi;
-			D = D - 2*dy;
+			plo.y = plo.y + plo.yi;
+			plo.D = plo.D - 2*plo.dx;
 		}
-		D = D + 2*dx;
-        y++;
+		plo.D = plo.D + 2*plo.dy;
+        plo.x++;
 	}
-
 }
 
-void    plotLine(int x0,int y0,int x1,int y1, t_data *data)
+void    plotLine(t_vect vect, t_data *data)
 {
-	if (abs(y1 - y0) < abs(x1 - x0))
+	if (abs(vect.y1 - vect.y0) < abs(vect.x1 - vect.x0))
 	{
-		if (x0 > x1)
-			plotLineLow(x1, y1, x0, y0, data);
+		if (vect.x0 > vect.x1)
+			plotLineLow(1, vect, data);
 		else
-			plotLineLow(x0, y0, x1, y1, data);
+			plotLineLow(0, vect, data);
 	}
 	else
 	{
-		if (y0 > y1)
-			plotLineHigh(x1, y1, x0, y0, data);
+		if (vect.y0 > vect.y1)
+			plotLineHigh(1, vect, data);
 		else
-			plotLineHigh(x0, y0, x1, y1, data);
+			plotLineHigh(0, vect, data);
 	}
 }

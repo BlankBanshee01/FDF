@@ -1,9 +1,14 @@
 #include "fdf.h"
 
-
-
-/////////////
-
+void    printing_usage(t_data *data)
+{
+    mlx_string_put(data->mlx, data->window, 20, 10, 0xFFFFFF, data->map_name);
+    mlx_string_put(data->mlx, data->window, 1600, 930, 0xFFFFFF, "P   : Parallel Projection");
+    mlx_string_put(data->mlx, data->window, 1600, 960, 0xFFFFFF, "I   : True Isometric Projection");
+    mlx_string_put(data->mlx, data->window, 1600, 990, 0xFFFFFF, "+ - : To Zoom In and Out");
+    mlx_string_put(data->mlx, data->window, 1600, 1020, 0xFFFFFF, "C   : Change Color W->R->G->B");
+    mlx_string_put(data->mlx, data->window, 1600, 1050, 0xFFFFFF, "ESC : To Quit");
+}
 void    initilazing_data(t_data *data, char *argv)
 {
     data->mlx = mlx_init();
@@ -18,11 +23,7 @@ void    initilazing_data(t_data *data, char *argv)
     data->projection = 'i';
     data->offset_x = 100;
     data->offset_y = 100;
-}
-
-void    manager(t_data *data)
-{
-
+    data->color = 0xFFFFFF;
 }
 
 int main(int argc, char **argv)
@@ -33,7 +34,7 @@ int main(int argc, char **argv)
     ft_draw_iso(&data);
     mlx_put_image_to_window(data.mlx, data.window, data.img_ptr, 0, 0);
     mlx_key_hook(data.window, key_press, &data);
-    mlx_string_put(data.mlx, data.window, 20, 20, 0xFFFFFF, data.map_name);
+    printing_usage(&data);
     mlx_loop (data.mlx);
 }
 

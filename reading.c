@@ -85,8 +85,6 @@ t_map    *reading_manager(char *argv)
 
     j = 0;
     i = 0;
-
-
     if (open(argv, O_RDONLY) == -1)
     {
         perror("error");

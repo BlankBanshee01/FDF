@@ -46,6 +46,16 @@ typedef struct	s_count
 }				t_count;
 
 
+typedef struct	s_ploting
+{
+	int dx;
+	int dy;
+	int D;
+	int x;
+	int xi;
+	int yi;
+	int y;
+}				t_plo;
 
 typedef	struct	s_data
 {
@@ -72,11 +82,12 @@ t_map		*reading_manager(char *argv);
 void ft_draw(t_data *data);
 void    ft_color_pixel(int x, int y, t_data *data);
 void ft_draw_iso(t_data *data);
-void    plotLine(int x0,int y0,int x1,int y1, t_data *data);
+void    plotLine(t_vect vect, t_data *data);
 void    free_int(int ***to_free, int length);
 void    free_table(char ***to_free);
 void quitting_esc(t_data *data);
 int key_press(int keycode, t_data *data);
+void    printing_usage(t_data *data);
 
 
 

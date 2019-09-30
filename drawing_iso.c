@@ -12,12 +12,12 @@ static void iso(int *x, int *y, int z)
 static void    ft_draw_iso_3(t_data *data, t_index p, t_vect *vect)
 {
     if(p.i < data->map->y_hight - 1)
-        plotLine(vect->x0, vect->y0, vect->x1, vect->y1, data);  // connect to down point
+        plotLine(*vect, data);  // connect to down point
     vect->y1 = p.y;
     vect->x1 = p.x + data->spc;
     iso(&vect->x1, &vect->y1, vect->z_right); // iso right
     if(p.j < data->map->x_long - 1)
-        plotLine(vect->x0, vect->y0, vect->x1, vect->y1, data); // connect to right point      
+        plotLine(*vect, data); // connect to right point      
 }
 
 static void    ft_draw_iso_2(t_data *data, t_index p, t_vect *vect)
