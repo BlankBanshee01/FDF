@@ -23,7 +23,6 @@ static int  map_length_valid(char *argv, t_map **map)
     int     fd;
     char    *line;
     int     len;
-    char    **table;
     int ret;
 
     len = -1;
@@ -34,7 +33,7 @@ static int  map_length_valid(char *argv, t_map **map)
     {
         if (len == -1)
                 len = ft_wcount2(line, ' ');
-        if (ft_wcount2(line, ' ') != len || len == 0)
+        if ((int)ft_wcount2(line, ' ') != len || len == 0)
         {
             ft_strdel(&line);
             return (0);

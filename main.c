@@ -30,6 +30,11 @@ int main(int argc, char **argv)
 {
     t_data data;
     
+    if (argc != 2)
+        {
+            ft_putstr("usage: fdf file.fdf");
+            return (1);
+        }
     initilazing_data(&data, argv[1]);
     ft_draw_iso(&data);
     mlx_put_image_to_window(data.mlx, data.window, data.img_ptr, 0, 0);
