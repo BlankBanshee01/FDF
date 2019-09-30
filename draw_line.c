@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_line.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iet-tibi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/30 20:43:17 by iet-tibi          #+#    #+#             */
+/*   Updated: 2019/09/30 20:58:29 by iet-tibi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-static void flip_coord(t_vect *vect)
+static void	flip_coord(t_vect *vect)
 {
 	int tmp;
 
@@ -9,10 +21,10 @@ static void flip_coord(t_vect *vect)
 	vect->x1 = tmp;
 	tmp = vect->y0;
 	vect->y0 = vect->y1;
-	vect->y1 = tmp;	
+	vect->y1 = tmp;
 }
 
-static void setting_var(t_plo *plo, t_vect vect)
+static void	setting_var(t_plo *plo, t_vect vect)
 {
 	plo->dx = vect.x1 - vect.x0;
 	plo->dy = vect.y1 - vect.y0;
@@ -22,7 +34,7 @@ static void setting_var(t_plo *plo, t_vect vect)
 	plo->x = vect.x0;
 }
 
-static void    plotLineHigh(int rev, t_vect vect, t_data *data)
+static void	plotlinehigh(int rev, t_vect vect, t_data *data)
 {
 	t_plo plo;
 
@@ -33,21 +45,21 @@ static void    plotLineHigh(int rev, t_vect vect, t_data *data)
 		plo.xi = -1;
 		plo.dx = -plo.dx;
 	}
-	plo.D = 2*plo.dx - plo.dy;
+	plo.d = 2 * plo.dx - plo.dy;
 	while (plo.y <= vect.y1)
 	{
-		ft_color_pixel(plo.x,plo.y, data);
-		if (plo.D > 0)
+		ft_color_pixel(plo.x, plo.y, data);
+		if (plo.d > 0)
 		{
 			plo.x = plo.x + plo.xi;
-			plo.D = plo.D - 2*plo.dy;
+			plo.d = plo.d - 2 * plo.dy;
 		}
-		plo.D = plo.D + 2*plo.dx;
-        plo.y++;
+		plo.d = plo.d + 2 * plo.dx;
+		plo.y++;
 	}
 }
 
-static void    plotLineLow(int rev, t_vect vect, t_data *data)
+static void	plotlinelow(int rev, t_vect vect, t_data *data)
 {
 	t_plo plo;
 
@@ -58,34 +70,34 @@ static void    plotLineLow(int rev, t_vect vect, t_data *data)
 		plo.yi = -1;
 		plo.dy = -plo.dy;
 	}
-	plo.D = 2*plo.dy - plo.dx;
+	plo.d = 2 * plo.dy - plo.dx;
 	while (plo.x < vect.x1)
 	{
-		ft_color_pixel(plo.x,plo.y, data);
-		if (plo.D > 0)
+		ft_color_pixel(plo.x, plo.y, data);
+		if (plo.d > 0)
 		{
 			plo.y = plo.y + plo.yi;
-			plo.D = plo.D - 2*plo.dx;
+			plo.d = plo.d - 2 * plo.dx;
 		}
-		plo.D = plo.D + 2*plo.dy;
-        plo.x++;
+		plo.d = plo.d + 2 * plo.dy;
+		plo.x++;
 	}
 }
 
-void    plotLine(t_vect vect, t_data *data)
+void		plotline(t_vect vect, t_data *data)
 {
 	if (abs(vect.y1 - vect.y0) < abs(vect.x1 - vect.x0))
 	{
 		if (vect.x0 > vect.x1)
-			plotLineLow(1, vect, data);
+			plotlinelow(1, vect, data);
 		else
-			plotLineLow(0, vect, data);
+			plotlinelow(0, vect, data);
 	}
 	else
 	{
 		if (vect.y0 > vect.y1)
-			plotLineHigh(1, vect, data);
+			plotlinehigh(1, vect, data);
 		else
-			plotLineHigh(0, vect, data);
+			plotlinehigh(0, vect, data);
 	}
 }

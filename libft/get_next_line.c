@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iet-tibi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/30 21:36:52 by iet-tibi          #+#    #+#             */
+/*   Updated: 2019/09/30 21:37:26 by iet-tibi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
-int				fill_next_line(int fd, char **line, char **ch, int rvalue)
+int	fill_next_line(int fd, char **line, char **ch, int rvalue)
 {
-	char		*stock;
-	int			i;
+	char	*stock;
+	int		i;
 
 	i = 0;
 	while (ch[fd][i] != '\n' && ch[fd][i])
@@ -28,7 +39,7 @@ int				fill_next_line(int fd, char **line, char **ch, int rvalue)
 	return (1);
 }
 
-int				get_next_line(const int fd, char **line)
+int	get_next_line(const int fd, char **line)
 {
 	static char	*ch[4096];
 	char		buff[BUFF_SIZE + 1];

@@ -6,7 +6,7 @@
 /*   By: iet-tibi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 23:03:12 by iet-tibi          #+#    #+#             */
-/*   Updated: 2018/10/28 15:21:43 by iet-tibi         ###   ########.fr       */
+/*   Updated: 2019/09/30 21:39:44 by iet-tibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-#define BUFF_SIZE 30
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+# define BUFF_SIZE 30
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 
 typedef struct		s_list
 {

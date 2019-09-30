@@ -6,12 +6,12 @@
 /*   By: iet-tibi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 17:26:42 by iet-tibi          #+#    #+#             */
-/*   Updated: 2018/10/24 18:35:21 by iet-tibi         ###   ########.fr       */
+/*   Updated: 2019/09/30 21:36:19 by iet-tibi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h> 
+
 static unsigned int	ft_cc(const char *str, char c)
 {
 	size_t	i;
