@@ -18,7 +18,7 @@ void	ft_isdir(int ret, int fd, t_map **map, int len)
 	{
 		close(fd);
 		free(*map);
-		ft_putstr("Argument is a directory.\nUsage: ./fdf file.fdf\n");
+		ft_putstr("Argument is a directory.\nUsage : ./fdf <filename>\n");
 		exit(0);
 	}
 	if (len == -1)
@@ -27,7 +27,6 @@ void	ft_isdir(int ret, int fd, t_map **map, int len)
 		free(*map);
 		ft_putstr("No data found.\n");
 		exit(0);
-
 	}
 }
 
@@ -57,6 +56,8 @@ void	free_table(char ***to_free)
 
 void	quitting_esc(t_data *data)
 {
+	mlx_clear_window(data->mlx, data->window);
+	mlx_destroy_image(data->mlx, data->img_ptr);
 	free_int(&data->map->map_cord, data->map->y_hight);
 	exit(0);
 }

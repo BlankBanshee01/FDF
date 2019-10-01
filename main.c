@@ -41,10 +41,10 @@ void	printing_usage(t_data *data)
 
 void	initilazing_data(t_data *data, char *argv)
 {
+	data->map = reading_manager(argv);
 	data->mlx = mlx_init();
 	data->width = 1920;
 	data->height = 1080;
-	data->map = reading_manager(argv);
 	data->window = mlx_new_window(data->mlx, data->width, data->height, "FDF");
 	data->img_ptr = mlx_new_image(data->mlx, data->width, data->height);
 	data->image = (int *)mlx_get_data_addr(data->img_ptr,\
@@ -63,7 +63,7 @@ int		main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putstr("usage: fdf file.fdf\n");
+		ft_putstr("Usage : ./fdf <filename>\n");
 		return (1);
 	}
 	initilazing_data(&data, argv[1]);
