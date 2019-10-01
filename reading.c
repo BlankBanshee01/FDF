@@ -57,7 +57,7 @@ static int			map_length_valid(char *argv, t_map **map)
 		free(line);
 		(*map)->y_hight += 1;
 	}
-	ft_isdir(ret, fd, map);
+	ft_isdir(ret, fd, map, len);
 	(*map)->x_long = len;
 	close(fd);
 	return (1);

@@ -30,18 +30,18 @@ static void	redo_proj(t_data *data, int keycode)
 static void	spacing(t_data *data, int keycode)
 {
 	if (keycode == 69)
-		data->spc += 5;
-	else if (data->spc > 5)
-		data->spc -= 5;
+		data->spc += 3;
+	else if (keycode == 78 && data->spc > 5)
+		data->spc -= 3;
 	reinitialize_win(data);
 }
 
 static void	moving(t_data *data, int keycode)
 {
-	keycode == 123 ? data->offset_x -= 50 : data->offset_x;
-	keycode == 126 ? data->offset_y -= 50 : data->offset_y;
-	keycode == 124 ? data->offset_x += 50 : data->offset_x;
-	keycode == 125 ? data->offset_y += 50 : data->offset_y;
+	keycode == 123 ? data->offset_x -= 100 : data->offset_x;
+	keycode == 126 ? data->offset_y -= 100 : data->offset_y;
+	keycode == 124 ? data->offset_x += 100 : data->offset_x;
+	keycode == 125 ? data->offset_y += 100 : data->offset_y;
 	reinitialize_win(data);
 }
 

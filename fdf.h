@@ -23,7 +23,6 @@ typedef struct	s_map
 	int			x_long;
 	int			y_hight;
 	int			**map_cord;
-
 }				t_map;
 
 typedef struct	s_vect
@@ -87,7 +86,7 @@ void			quitting_esc(t_data *data);
 void			printing_usage(t_data *data);
 void			reinitialize_win(t_data *data);
 int				key_press(int keycode, t_data *data);
-void			ft_isdir(int ret, int fd, t_map **map);
+void			ft_isdir(int ret, int fd, t_map **map, int len);
 
 #endif
 

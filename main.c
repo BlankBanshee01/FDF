@@ -52,7 +52,7 @@ void	initilazing_data(t_data *data, char *argv)
 	data->map_name = argv;
 	data->spc = 10;
 	data->projection = 'i';
-	data->offset_x = 100;
+	data->offset_x = 1000;
 	data->offset_y = 100;
 	data->color = 0xFFFFFF;
 }
@@ -69,7 +69,7 @@ int		main(int argc, char **argv)
 	initilazing_data(&data, argv[1]);
 	ft_draw_iso(&data);
 	mlx_put_image_to_window(data.mlx, data.window, data.img_ptr, 0, 0);
-	mlx_key_hook(data.window, key_press, &data);
+	mlx_hook(data.window, 2, 0, key_press, &data);
 	printing_usage(&data);
 	mlx_loop(data.mlx);
 }

@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void	ft_isdir(int ret, int fd, t_map **map)
+void	ft_isdir(int ret, int fd, t_map **map, int len)
 {
 	if (ret == -1)
 	{
@@ -20,6 +20,14 @@ void	ft_isdir(int ret, int fd, t_map **map)
 		free(*map);
 		ft_putstr("Argument is a directory.\nUsage: ./fdf file.fdf\n");
 		exit(0);
+	}
+	if (len == -1)
+	{
+		close(fd);
+		free(*map);
+		ft_putstr("No data found.\n");
+		exit(0);
+
 	}
 }
 
